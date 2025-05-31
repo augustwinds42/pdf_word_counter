@@ -50,6 +50,30 @@ A web-based application that allows users to upload PDF files and search for spe
 
 ## Deployment
 
+### GitHub and Azure Deployment
+
+This application is set up for automated deployment to Azure App Service using GitHub Actions:
+
+1. Push your code to GitHub:
+   ```bash
+   git push origin main
+   ```
+
+2. The GitHub Actions workflow will automatically:
+   - Run all tests with coverage reporting
+   - Deploy to Azure if tests pass
+
+For detailed deployment instructions, see:
+- [AZURE_DEPLOYMENT.md](AZURE_DEPLOYMENT.md) - Different methods to deploy to Azure
+- [AZURE_CONFIGURATION.md](AZURE_CONFIGURATION.md) - How to configure your Azure Web App
+- [TEST_DOCUMENTATION.md](TEST_DOCUMENTATION.md) - Information about the test suite
+
+### Required Secrets for GitHub Actions
+
+In your GitHub repository, add these secrets:
+- `AZURE_WEBAPP_NAME`: Your Azure Web App name
+- `AZURE_WEBAPP_PUBLISH_PROFILE`: Content of the publish profile from Azure
+
 This application can be deployed to Azure Web App Service. See [AZURE_DEPLOYMENT.md](AZURE_DEPLOYMENT.md) for detailed deployment instructions.
 
 ## Project Structure
