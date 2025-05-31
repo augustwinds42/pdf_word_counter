@@ -1,0 +1,40 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Local environment
+.env
+
+# Uploaded files
+uploads/*
+!uploads/.gitkeep
+
+# Flask
+instance/
+flask_session/
+
+# Coverage reports
+.coverage
+htmlcov/
+coverage_html/
+
+# Logs
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# Mac
+.DS_Store

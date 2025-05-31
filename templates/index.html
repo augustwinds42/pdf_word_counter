@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}PDF Word Counter - Upload{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <h2>Upload PDF & Search for Word</h2>
+        
+        <form method="POST" enctype="multipart/form-data" id="upload-form">
+            <div class="form-group">
+                <label for="pdfFile">Select PDF File:</label>
+                <div class="file-input-container">
+                    <input type="file" id="pdfFile" name="pdfFile" accept=".pdf" required>
+                    <div class="file-input-custom">
+                        <span id="file-name">No file selected</span>
+                        <button type="button" class="browse-btn">Browse</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="searchWord">Word to Search:</label>
+                <input type="text" id="searchWord" name="searchWord" placeholder="Enter word to search" required>
+            </div>
+            
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="showSample" name="showSample" checked>
+                <label for="showSample">Show sample text from each page in results</label>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Search PDF</button>
+            </div>
+        </form>
+        
+        <div class="features">
+            <h3>Features</h3>
+            <ul>
+                <li>Advanced PDF text extraction with word integrity preservation</li>
+                <li>Handles hyphenation and word breaks common in PDFs</li>
+                <li>Shows page-by-page word occurrences</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Spinner -->
+<div class="spinner-container" id="spinner">
+    <div class="spinner-content">
+        <div class="spinner"></div>
+        <div class="spinner-text">Processing PDF, please wait...</div>
+    </div>
+</div>
+
+<script>
+    // Custom file input display
+    document.querySelector('.browse-btn').addEventListener('click', function() {
+        document.getElementById('pdfFile').click();
+    });
+    
+    document.getElementById('pdfFile').addEventListener('change', function() {
+        const fileName = this.files[0] ? this.files[0].name : 'No file selected';
+        document.getElementById('file-name').textContent = fileName;
+    });
+    
+    // Show spinner when form is submitted
+    document.getElementById('upload-form').addEventListener('submit', function() {
+        document.getElementById('spinner').style.display = 'flex';
+    });
+</script>
+{% endblock %}

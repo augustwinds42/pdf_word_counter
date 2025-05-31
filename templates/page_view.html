@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}PDF Word Counter - Page {{ page_num }} View{% endblock %}
+
+{% block content %}
+<div class="container page-view-container">
+    <div class="card">
+        <div class="page-view-header">
+            <h2>Page {{ page_num }} Content</h2>
+            <div class="page-info">
+                <span class="label">Word:</span> <span class="value">{{ search_word }}</span>
+                <span class="label">Occurrences on this page:</span> <span class="value highlight">{{ word_count }}</span>
+            </div>
+            <div class="navigation-buttons">
+                <a href="{{ url_for('results') }}" class="back-btn">Back to Results</a>
+                <a href="{{ url_for('new_search') }}" class="new-search-btn">New Search</a>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <h3>Full Page Text</h3>
+            <div class="full-text" id="pageText">{{ full_text }}</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Highlight the search word in the text
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchWord = "{{ search_word }}";
+        const textContainer = document.getElementById('pageText');
+        const text = textContainer.innerHTML;
+        
+        // Create a regex with word boundaries to match the whole word
+        const regex = new RegExp('\\b(' + searchWord + ')\\b', 'gi');
+        
+        // Replace with highlighted version
+        const highlightedText = text.replace(regex, '<span class="highlight-word">$1</span>');
+        textContainer.innerHTML = highlightedText;
+    });
+</script>
+{% endblock %}

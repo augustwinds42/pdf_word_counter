@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}PDF Word Counter - Results{% endblock %}
+
+{% block content %}
+<div class="container results-container">
+    <div class="card">
+        <div class="results-header">
+            <h2>Search Results</h2>
+            <div class="search-info">
+                <span class="label">Word:</span> <span class="value">{{ search_word }}</span>
+                <span class="label">Total Occurrences:</span> <span class="value highlight">{{ total_count }}</span>
+                <span class="label">Pages with occurrences:</span> <span class="value">{{ pages_count }}</span>
+            </div>
+            <a href="{{ url_for('new_search') }}" class="new-search-btn">New Search</a>
+        </div>
+        
+        {% if pages %}
+            <div class="results-list">
+                <h3>Pages with Occurrences</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Page</th>
+                                <th>Count</th>
+                                {% if show_sample %}
+                                <th>Sample text from page</th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for page_num, preview, count in pages %}
+                                <tr>
+                                    <td><a href="{{ url_for('view_page', page_num=page_num) }}" class="page-link">{{ page_num }}</a></td>
+                                    <td class="count">{{ count }}</td>
+                                    {% if show_sample %}
+                                    <td class="preview">{{ preview }}</td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            
+                            <!-- Total row -->
+                            <tr class="total-row">
+                                <td><strong>Total</strong></td>
+                                <td class="count"><strong>{{ total_count }}</strong></td>
+                                {% if show_sample %}
+                                <td></td>
+                                {% endif %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% else %}
+            <div class="no-results">
+                <p>No occurrences of "{{ search_word }}" found in the document.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
